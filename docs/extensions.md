@@ -209,7 +209,7 @@ However, Applications can also provide `url` or `command` instead. The full deta
 
 `url` will launch that URL in Flashpoints Browser Mode (Electron). The launch command must be subtituted since it can not be given as an argument this way. See below for allowed subtitutions.
 
-`command` will run a registered command that is given the launching Game as an argument and expects a valid response of either a string (`path`) or BrowserApplicationOpts (`url`) which will then be run accordingly. Subtitutions cannot be used on the returned values, although you may find their equiavelents in the API, with an exception of os, arch and cwd which you may use Node types for. (`@types/node`)
+`command` will run a registered command that is given the launching Game as an argument and expects a valid response of either a string (`path`) or BrowserApplicationOpts (`url`) which will then be run accordingly. Subtitutions cannot be used on the returned values, although you may find their equivalents in the API, with an exception of os, arch and cwd which you may use Node types for. (`@types/node`)
 
 `url` and `path` string subtitutes:
 
