@@ -403,7 +403,7 @@ export function main(init: Init): void {
       const isMaximized = window.isMaximized();
       window.webContents.send(WindowIPC.WINDOW_RESIZE, size[0], size[1], isMaximized);
     });
-    // Derefence window when closed
+    // Dereference window when closed
     window.on('closed', () => {
       if (state.window === window) {
         state.window = undefined;
