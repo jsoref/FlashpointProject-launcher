@@ -305,6 +305,6 @@ export function createApiFactory(extId: string, extManifest: IExtensionManifest,
     registerDisposable: registerDisposable,
     newDisposable: newDisposable
 
-    // Note - Types are defined in the decleration file, not here
+    // Note - Types are defined in the declaration file, not here
   };
 }
