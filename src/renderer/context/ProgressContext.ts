@@ -174,7 +174,7 @@ function progressReducer(prevState: Record<string, (ProgressData[]|undefined)>, 
 }
 
 /**
- * Returns the ProgressData of a parent (initalizes it if necessary)
+ * Returns the ProgressData of a parent (initializes it if necessary)
  * @param state Mutable ProgressState
  * @param key Parent's Key
  */
