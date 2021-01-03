@@ -126,7 +126,7 @@ export type MainAction = {
   /** The playlistId can be of type string or undefined. Null means it will remain the same as before. */
   playlistId: string | undefined | null;
 } | {
-  type: MainActionType.SET_VIEW_BOUNDRIES;
+  type: MainActionType.SET_VIEW_BOUNDARIES;
   library: string;
   start: number;
   count: number;

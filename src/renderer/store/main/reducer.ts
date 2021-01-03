@@ -46,16 +46,16 @@ export function mainStateReducer(state: MainState = createInitialState(), action
       };
     }
 
-    case MainActionType.SET_VIEW_BOUNDRIES: {
+    case MainActionType.SET_VIEW_BOUNDARIES: {
       const view = state.views[action.library];
 
       if (!view) { return state; }
 
-      const sameBoundries = (view.lastStart === action.start && view.lastCount === action.count);
+      const sameBoundaries = (view.lastStart === action.start && view.lastCount === action.count);
 
-      if (!view.isDirty && sameBoundries) { return state; } // Optimization, this should never be able to return any pages not already flagged
+      if (!view.isDirty && sameBoundaries) { return state; } // Optimization, this should never be able to return any pages not already flagged
 
-      // Flag unseen pages that have entered the boundries
+      // Flag unseen pages that have entered the boundaries
 
       let newPageState: ViewPageStates | undefined;
 
@@ -67,7 +67,7 @@ export function mainStateReducer(state: MainState = createInitialState(), action
         }
       }
 
-      if (!newPageState && sameBoundries) { return state; } // Nothing has changed
+      if (!newPageState && sameBoundaries) { return state; } // Nothing has changed
 
       const newView: View = {
         ...view,

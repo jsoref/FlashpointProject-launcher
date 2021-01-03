@@ -877,7 +877,7 @@ export class App extends React.Component<AppProps> {
 
   updateView: UpdateView = (start, count) => {
     this.props.dispatchMain({
-      type: MainActionType.SET_VIEW_BOUNDRIES,
+      type: MainActionType.SET_VIEW_BOUNDARIES,
       library: getBrowseSubPath(this.props.location.pathname),
       start: start,
       count: count,

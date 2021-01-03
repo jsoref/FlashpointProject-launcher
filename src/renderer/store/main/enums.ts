@@ -5,8 +5,8 @@ export enum MainActionType {
   // Normal actions
   /** Set the query of a view. */
   SET_VIEW_QUERY = '@@main/SET_VIEW_QUERY',
-  /** Set the current "boundries" of a view. These describe the range of currently visible pages. */
-  SET_VIEW_BOUNDRIES = '@@main/SET_VIEW_BOUNDRIES',
+  /** Set the current "boundaries" of a view. These describe the range of currently visible pages. */
+  SET_VIEW_BOUNDARIES = '@@main/SET_VIEW_BOUNDARIES',
   /** Flag the request meta as requested. */
   REQUEST_VIEW_META = '@@main/SET_VIEW_REQUESTED',
   /** Set the meta of a view and flag the meta as received. */
