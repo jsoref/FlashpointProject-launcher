@@ -51,7 +51,7 @@ export type BackState = {
   isHandling: boolean;
   init: { [key in BackInit]: boolean; };
   initEmitter: InitEmitter;
-  queries: Record<string, BackQueryChache>;
+  queries: Record<string, BackQueryCache>;
   log: ILogEntry[];
   serviceInfo?: ServiceFileData;
   services: Map<string, ManagedChildProcess>;
@@ -71,7 +71,7 @@ export type BackState = {
   connection: Connection | undefined;
 }
 
-export type BackQueryChache = {
+export type BackQueryCache = {
   query: BackQuery;
   games: Game[];
   viewGames: ViewGame[];
