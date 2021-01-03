@@ -1,0 +1,15 @@
+^\.github/
+^src/database/migration/
+^src/renderer/Util\.ts$
+^src/back/util/charCode\.ts$
+^package\.json$
+^lang/.*-.*\.json$
+ignore$
+\.exe$
+\.gitmodules$
+\.icns$
+\.ico$
+\.placeholder$
+\.png$
+\.snap$
+\.svg$
