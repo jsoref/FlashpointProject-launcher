@@ -70,7 +70,7 @@ Reasons for discarding includes:
 Discarded changes (X changes in Y games):
 
   <Game title> (<Game ID>)
-    <Property name>: <Discarde value>
+    <Property name>: <Discarded value>
     ...
 
   ...
