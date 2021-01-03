@@ -274,7 +274,7 @@ export class SocketServer {
 }
 
 type StartServerResult = {
-  /** WebScoket server (undefined if it failed to listen). */
+  /** WebSocket server (undefined if it failed to listen). */
   server: ws.Server;
   /** Port it is listening on (-1 if it failed to listen). */
   port: number;
