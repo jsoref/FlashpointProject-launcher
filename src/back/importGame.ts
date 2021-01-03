@@ -317,7 +317,7 @@ async function importGameImage(image: CurationIndexImage, gameId: string, folder
   }
 }
 
-/** Symlinks (or copies if unavailble) a curations `content` folder to `htdocs\content`
+/** Symlinks (or copies if unavailable) a curations `content` folder to `htdocs\content`
  * @param curationKey Key of the (game) curation to link
  */
 async function linkContentFolder(curationKey: string, fpPath: string, isDev: boolean, exePath: string, htdocsPath: string, symlinkCurationContent: boolean) {
