@@ -330,7 +330,7 @@ export class ConfigPage extends React.Component<ConfigPageProps, ConfigPageState
             onChange={(event) => this.onAppPathOverridePathChange(index, event.target.value)}
             text={item.path} />
           <div
-            className='setting__row__content--override-row__seperator'>
+            className='setting__row__content--override-row__separator'>
             {'->'}
           </div>
           <InputField
