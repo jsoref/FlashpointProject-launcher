@@ -163,7 +163,7 @@ export async function importCuration(opts: ImportCurationOpts): Promise<void> {
                         date.getUTCDate().toString().padStart(2, '0');
         const backupPath = path.join(fpPath, 'Curations', 'Imported', `${dateStr}__${curation.key}`);
         await fs.copy(getCurationFolder(curation, fpPath), backupPath);
-        // Why does this return before finishing coying? Replaced with line above for now.
+        // Why does this return before finishing copying? Replaced with line above for now.
         // await copyFolder(getCurationFolder(curation, fpPath), backupPath, true, opts.openDialog);
       }
       if (log) {
