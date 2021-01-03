@@ -45,17 +45,17 @@ export namespace TagManager {
 
   export async function findTags(name?: string): Promise<Tag[]> {
     const tagRepository = getManager().getRepository(Tag);
-    const tagAliasRepostiory = getManager().getRepository(TagAlias);
+    const tagAliasRepository = getManager().getRepository(TagAlias);
 
     let aliases: TagAlias[] = [];
     if (name) {
-      aliases = await tagAliasRepostiory.find({
+      aliases = await tagAliasRepository.find({
         where: [
           { name: Like(name + '%') }
         ],
       });
     } else {
-      aliases = await tagAliasRepostiory.find();
+      aliases = await tagAliasRepository.find();
     }
 
     return tagRepository.createQueryBuilder('tag')
@@ -118,8 +118,8 @@ export namespace TagManager {
   }
 
   export async function cleanupTagAliases() {
-    const tagAliasRepostiory = getManager().getRepository(TagAlias);
-    const q = tagAliasRepostiory.createQueryBuilder('tag_alias')
+    const tagAliasRepository = getManager().getRepository(TagAlias);
+    const q = tagAliasRepository.createQueryBuilder('tag_alias')
     .delete()
     .where('tag_alias.tagId IS NULL');
     return q.execute();
@@ -127,9 +127,9 @@ export namespace TagManager {
 
   export async function findTag(name: string): Promise<Tag | undefined> {
     const tagRepository = getManager().getRepository(Tag);
-    const tagAliasRepostiory = getManager().getRepository(TagAlias);
+    const tagAliasRepository = getManager().getRepository(TagAlias);
 
-    const alias = await tagAliasRepostiory.findOne({
+    const alias = await tagAliasRepository.findOne({
       where: [
         { name: name }
       ]
@@ -145,9 +145,9 @@ export namespace TagManager {
   }
 
   export async function findTagSuggestions(name: string): Promise<TagSuggestion[]> {
-    const tagAliasRepostiory = getManager().getRepository(TagAlias);
+    const tagAliasRepository = getManager().getRepository(TagAlias);
 
-    const subQuery = tagAliasRepostiory.createQueryBuilder('tag_alias')
+    const subQuery = tagAliasRepository.createQueryBuilder('tag_alias')
     .leftJoin(Tag, 'tag', 'tag_alias.tagId = tag.id')
     .select('tag.id, tag.categoryId, tag.primaryAliasId, tag_alias.name')
     .where('tag_alias.name like :partial', { partial: name + '%' })
@@ -197,7 +197,7 @@ export namespace TagManager {
 
   export async function createTag(name: string, categoryName?: string, aliases?: string[]): Promise<Tag | undefined> {
     const tagRepository = getManager().getRepository(Tag);
-    const tagAliasRepostiory = getManager().getRepository(TagAlias);
+    const tagAliasRepository = getManager().getRepository(TagAlias);
     const tagCategoryRepository = getManager().getRepository(TagCategory);
     let category: TagCategory | undefined = undefined;
 
@@ -228,20 +228,20 @@ export namespace TagManager {
       const tag = tagRepository.create({ category: category });
       // Save the newly created tag, return it
       let savedTag = await tagRepository.save(tag);
-      const tagAlias = tagAliasRepostiory.create();
+      const tagAlias = tagAliasRepository.create();
       tagAlias.name = name;
       tagAlias.tagId = savedTag.id;
       if (aliases) {
         for (const a of aliases) {
-          const tagAlias = tagAliasRepostiory.create();
+          const tagAlias = tagAliasRepository.create();
           tagAlias.name = a;
           tagAlias.tagId = savedTag.id;
-          tagAliases.push(await tagAliasRepostiory.save(tagAlias));
+          tagAliases.push(await tagAliasRepository.save(tagAlias));
         }
       }
       savedTag.primaryAlias = tagAlias;
       savedTag = await tagRepository.save(savedTag);
-      savedTag.aliases = [await tagAliasRepostiory.save(tagAlias), ...tagAliases];
+      savedTag.aliases = [await tagAliasRepository.save(tagAlias), ...tagAliases];
       return savedTag;
     }
   }
