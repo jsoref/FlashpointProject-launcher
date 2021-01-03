@@ -1175,7 +1175,7 @@ function invalidLaunchCommandWarnings(folderPath: string, launchCommand: string,
       const filePath = path.join(folderPath, unescape(lc).replace(/(^\w+:|^)\/\//, ''));
       // Push a game to the list if its launch command file is missing
       if (!fs.existsSync(filePath)) {
-        warns.push(strings.ilc_nonExistant);
+        warns.push(strings.ilc_nonExistent);
       }
     }
   }

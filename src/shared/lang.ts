@@ -363,7 +363,7 @@ const langTemplate = {
     'nonExistingLibrary',
     'nonContentFolders',
     'ilc_notHttp',
-    'ilc_nonExistant',
+    'ilc_nonExistent',
   ] as const,
   playlist: [
     'enterDescriptionHere',
