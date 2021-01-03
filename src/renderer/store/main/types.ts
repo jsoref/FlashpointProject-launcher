@@ -75,7 +75,7 @@ export type MainState = {
   randomGames: ViewGame[];
   /** Whether we're currently requesting random games */
   requestingRandomGames: boolean;
-  /** If the random games should be shiften when the request is complete. */
+  /** If the random games should be shifted when the request is complete. */
   shiftRandomGames: boolean;
 
   /** Data and state used for the upgrade system (optional install-able downloads from the HomePage). */
