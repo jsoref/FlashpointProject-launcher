@@ -142,8 +142,8 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
   componentDidUpdate(prevProps: RightBrowseSidebarProps, prevState: RightBrowseSidebarState): void {
     if (this.props.isEditing && !prevProps.isEditing) {
       if (this.props.currentGame) {
-        this.checkImageExistance(SCREENSHOTS, this.props.currentGame.id);
-        this.checkImageExistance(LOGOS, this.props.currentGame.id);
+        this.checkImageExistence(SCREENSHOTS, this.props.currentGame.id);
+        this.checkImageExistence(LOGOS, this.props.currentGame.id);
       } else {
         this.setState({
           screenshotExists: false,
@@ -657,15 +657,15 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
       // Refresh image if it was replaced or removed
       if (this.props.isEditing && this.props.currentGame && this.props.currentGame.id === id) {
         if (folder === LOGOS) {
-          this.checkImageExistance(LOGOS, this.props.currentGame.id);
+          this.checkImageExistence(LOGOS, this.props.currentGame.id);
         } else if (folder === SCREENSHOTS) {
-          this.checkImageExistance(SCREENSHOTS, this.props.currentGame.id);
+          this.checkImageExistence(SCREENSHOTS, this.props.currentGame.id);
         }
       }
     }
   }
 
-  checkImageExistance(folder: typeof LOGOS | typeof SCREENSHOTS, id: string) {
+  checkImageExistence(folder: typeof LOGOS | typeof SCREENSHOTS, id: string) {
     fetch(getGameImageURL(folder, id))
     .then(res => {
       const target = (folder === LOGOS) ? 'thumbnailExists' : 'screenshotExists';

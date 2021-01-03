@@ -324,7 +324,7 @@ export class App extends React.Component<AppProps> {
           }
         });
       }
-      // Do existance checks on all upgrades
+      // Do existence checks on all upgrades
       await Promise.all(allData.map(async upgrade => {
         const baseFolder = fullFlashpointPath;
         // Perform install checks
