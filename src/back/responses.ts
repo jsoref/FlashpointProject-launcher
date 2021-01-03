@@ -631,20 +631,20 @@ export function registerRequestCallbacks(state: BackState): void {
   });
 
   state.socketServer.register(BackIn.UPDATE_PREFERENCES, async (event, data) => {
-    const dif = difObjects(defaultPreferencesData, state.preferences, data);
-    if (dif) {
-      if ((typeof dif.currentLanguage  !== 'undefined' && dif.currentLanguage  !== state.preferences.currentLanguage) ||
-          (typeof dif.fallbackLanguage !== 'undefined' && dif.fallbackLanguage !== state.preferences.fallbackLanguage)) {
+    const diff = diffObjects(defaultPreferencesData, state.preferences, data);
+    if (diff) {
+      if ((typeof diff.currentLanguage  !== 'undefined' && diff.currentLanguage  !== state.preferences.currentLanguage) ||
+          (typeof diff.fallbackLanguage !== 'undefined' && diff.fallbackLanguage !== state.preferences.fallbackLanguage)) {
         state.languageContainer = createContainer(
           state.languages,
-          (typeof dif.currentLanguage !== 'undefined') ? dif.currentLanguage : state.preferences.currentLanguage,
+          (typeof diff.currentLanguage !== 'undefined') ? diff.currentLanguage : state.preferences.currentLanguage,
           state.localeCode,
-          (typeof dif.fallbackLanguage !== 'undefined') ? dif.fallbackLanguage : state.preferences.fallbackLanguage
+          (typeof diff.fallbackLanguage !== 'undefined') ? diff.fallbackLanguage : state.preferences.fallbackLanguage
         );
         state.socketServer.broadcast(BackOut.LANGUAGE_CHANGE, state.languageContainer);
       }
 
-      overwritePreferenceData(state.preferences, dif);
+      overwritePreferenceData(state.preferences, diff);
       await PreferencesFile.saveFile(path.join(state.configFolder, PREFERENCES_FILENAME), state.preferences);
     }
     state.socketServer.send(event.client, BackOut.UPDATE_PREFERENCES_RESPONSE, state.preferences);
@@ -1079,8 +1079,8 @@ export function registerRequestCallbacks(state: BackState): void {
  * @param a Compared to B.
  * @param b Compared to A. Values in the returned object is copied from this.
  */
-function difObjects<T>(template: T, a: T, b: DeepPartial<T>): DeepPartial<T> | undefined {
-  let dif: DeepPartial<T> | undefined;
+function diffObjects<T>(template: T, a: T, b: DeepPartial<T>): DeepPartial<T> | undefined {
+  let diff: DeepPartial<T> | undefined;
 
   for (const key in template) {
     const tVal = template[key];
@@ -1104,27 +1104,27 @@ function difObjects<T>(template: T, a: T, b: DeepPartial<T>): DeepPartial<T> | u
         }
 
         if (notEqual) {
-          if (!dif) { dif = {}; }
-          dif[key] = [ ...bVal ] as any;
+          if (!diff) { diff = {}; }
+          diff[key] = [ ...bVal ] as any;
         }
       }
       // Object
       else if (typeof tVal === 'object' && typeof aVal === 'object' && typeof bVal === 'object') {
-        const subDif = difObjects(tVal, aVal, bVal as any);
-        if (subDif) {
-          if (!dif) { dif = {}; }
-          dif[key] = subDif as any;
+        const subDiff = diffObjects(tVal, aVal, bVal as any);
+        if (subDiff) {
+          if (!diff) { diff = {}; }
+          diff[key] = subDiff as any;
         }
       }
       // Other
       else {
-        if (!dif) { dif = {}; }
-        dif[key] = bVal;
+        if (!diff) { diff = {}; }
+        diff[key] = bVal;
       }
     }
   }
 
-  return dif;
+  return diff;
 }
 
 function adjustGameFilter(filterOpts: FilterGameOpts): FilterGameOpts {
