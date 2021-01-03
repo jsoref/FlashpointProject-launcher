@@ -164,7 +164,7 @@ export function main(init: Init): void {
           localeCode: localeCode,
           exePath: app.getPath('exe'),
           acceptRemote: !!init.args['host-remote'],
-          version: app.getVersion(), // @TODO Manually load this from the package.json file while in a dev enviroment (so it doesn't use Electron's version)
+          version: app.getVersion(), // @TODO Manually load this from the package.json file while in a dev environment (so it doesn't use Electron's version)
         };
         state.backProc.send(JSON.stringify(msg));
       }));
