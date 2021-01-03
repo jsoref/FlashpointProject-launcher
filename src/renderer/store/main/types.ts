@@ -24,7 +24,7 @@ export type View = {
     /** Page keyset of the results. */
     pageKeyset: PageKeyset;
   };
-  /** State of the meta request (undfined means the view is "idle" and no request should be made). */
+  /** State of the meta request (undefined means the view is "idle" and no request should be made). */
   metaState?: RequestState;
   /** Games to display. */
   games: ViewGameSet;
